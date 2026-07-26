@@ -48,7 +48,7 @@ int main() {
                 a=ca;
             }
         }
-        cout << a << "\n";
+        cout<< a <<"\n";
     }
     return 0;
 }
