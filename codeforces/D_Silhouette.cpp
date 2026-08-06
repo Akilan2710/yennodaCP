@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define int long long
+#define ll long long
 
-signed main() {
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
@@ -11,44 +11,45 @@ signed main() {
     while(t--){
         int n;
         cin >> n;
-        vector<int> a(n),b(n);
+        vector<ll> a(n);
+        map<ll,ll> freq;
         for(int i=0;i<n;i++){
             cin >> a[i];
+            freq[a[i]]++;
         }
-        b=a;
-        sort(a.begin(),a.end());
-        unordered_map<int,int> mp;
-        int c=1,f=1,p=0;
-        if(a[0]!=0){
+        if(!freq.count(0)){
             cout << "-1\n";
             continue;
         }
-        for(int i=1;i<n;i++){
-            if(a[i]==a[i-1]){
-                c++;
-            }
-            else{
-                if((a[i]-a[i-1])%c!=0){
-                    cout << "-1\n";
+        map<ll,ll> mp;
+        ll ps=0,pc=0,pv=0;
+        bool f=true;
+        for(auto [cs,cc]:freq){
+            if(cs!=0){
+                ll d=cs-ps;
+                if(d%pc!=0){
                     f=0;
                     break;
                 }
-                else if((a[i]-a[i-1])/c<=p){
-                    cout << "-1\n";
+                ll u=d/pc;
+                if(u<=pv){
                     f=0;
                     break;
                 }
-                mp[a[i-1]]=(a[i]-a[i-1])/c;
-                p=mp[a[i-1]];
-                c=1;
+                mp[ps]=u;
+                pv=u;
             }
+            ps=cs;
+            pc=cc;
         }
-        mp[a[n-1]]=a[0]==a[n-1]?1:(p+1);
-        if(f){
+        if(!f){
+            cout << "-1\n";
+        }
+        else{
+            mp[ps]=pv+1;
             for(int i=0;i<n;i++){
-                cout << mp[b[i]] << " ";
+                cout << mp[a[i]] << " \n"[i==n-1];
             }
-            cout << "\n";
         }
     }
     return 0;
