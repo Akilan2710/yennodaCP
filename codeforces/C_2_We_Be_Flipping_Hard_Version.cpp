@@ -35,12 +35,15 @@ void solve(){
         return;
     }
 
+    int par=0;
     vector<int> ans;
     for (int i = idx - 1; i >= 0; i--){
-        if (ans.size() & 1)
+        if (par == 1)
             a[i] = -a[i];
-        if (a[i] > 0)
+        if (a[i] > 0){
             ans.push_back(i);
+            par ^= 1;
+        }
     }
     ans.push_back(idx);
 
