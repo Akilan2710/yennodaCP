@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-using ll = long long;
+#define ll long long
 const int MOD = 998244353;
 using namespace std;
 
