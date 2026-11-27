@@ -19,7 +19,7 @@ int main() {
             cin >> x >> y;
             if(s.find(x)!=s.end() || s.find(y)!=s.end()){
                 s.insert(x);s.insert(y);
-                l++;
+                l+=2;l--;
             }
             else e.push_back({x,y});
         }
